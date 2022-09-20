@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,5 +21,11 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+
+Route::get('/clients', function (Request $request) {
+    return view('clients', [
+        'clients' => $request->user()->clients
+    ]);
+})->middleware(['auth'])->name('clients');
 
 require __DIR__.'/auth.php';
